@@ -26,7 +26,7 @@ options = st.multiselect('Pick a category',
        'News & Mags (Unit)', 'Total'], default = 'Total')
 start_date = '2022-06-30'
 st.text('Start Date = ' + start_date)
-end_date = st.date_input('Pick a end date')
+end_date = st.date_input('Pick an end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
 
