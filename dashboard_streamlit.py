@@ -20,17 +20,10 @@ import pickle
 st.set_page_config(layout="wide")
 st.title('EG Group Sales Dashboard')
 options = st.multiselect('Pick a category',
-       ['Unleaded', 'Tobacco', 'Diesel', 'Instant Lottery', 'Drinks',
-       'Chiller', 'Confectionary', 'Grocery Vat', 'Snacks VAT',
-       'National Lottery', 'Grocery Zero', 'Paypoint', 'Car Care',
-       'Super Unleaded', 'Hot Drinks Unit', 'E-Cig/Vaping',
-       'News & Mags (Unit)', 'Sandwiches Unit', 'Feminine Hygiene',
-       'Fruit & Veg', 'Merchant VAT', 'Motor Oil', 'Pumptop Promotions',
-       'Greeting Cards', 'Domestic Fuel', 'Ice Cream', 'Non-Scan',
-       'Phonecards Vat', 'Stamps', 'Stationery', 'AdBlue Pack', 'Flowers',
-       'Maps', 'Toys', 'Unmapped Items', 'Paypoint PPOD',
-       'Spare Shop Sales 22', 'Phonecard Commission', 'Pick & Mix',
-       'Bakery Cold', 'Total'], default = 'Total')
+       ['Unleaded', 'Tobacco', 'Diesel', 'Drinks',
+       'Chiller', 'Confectionary', 'Snacks VAT',
+       'Grocery Zero', 'Hot Drinks Unit', 'E-Cig/Vaping',
+       'News & Mags (Unit)', 'Total'], default = 'Total')
 start_date = '2022-06-30'
 st.text('Start Date = ' + start_date)
 end_date = st.date_input('Pick a end date')
