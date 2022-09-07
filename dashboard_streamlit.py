@@ -56,13 +56,6 @@ for column in site_A_cat.columns:
     train = site_A_cat.loc[:, (slice(None), column)]
     model = sm.tsa.statespace.SARIMAX(train, order = (1,0,1), seasonal_order = (1,1,1,7),
                                 enforce_stationarity = False, enforce_invertibility = False, freq = 'D').fit()
-
-'''
-file= 'C:\\Users\\nirol\\OneDrive\\Documents\\MSc\\Dissertation\\Models\\SiteA' + option + '.pkl'
-    loaded_model= pickle.load(open(file,'rb'))
-'''
-
-
     forecast = model.forecast(steps = days)
     forecast.name = column[1]
     df = df.append(forecast)
