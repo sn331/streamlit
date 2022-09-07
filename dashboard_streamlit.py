@@ -77,10 +77,10 @@ st.line_chart(df[options])
 
 df = df.groupby(df.Month)[options].sum()
 site_A_cat = site_A_cat.groupby(pd.to_datetime(site_A_cat.index).month).sum()
-bar = alt.Chart(site_A_cat).mark_bar().encode(
+'''bar = alt.Chart(site_A_cat).mark_bar().encode(
     x = site_A_cat.index,
     y = site_A_cat.loc[:, (slice(None), column)]
-)
+)'''
 
 st.bar_chart(df)
-st.altair_chart(bar)
+#st.altair_chart(bar)
