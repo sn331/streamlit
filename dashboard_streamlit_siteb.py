@@ -64,7 +64,7 @@ df['Year'] = df.index.year
 
 total_sales = df[options].sum()
 #st.write('Total Sales =', total_sales.values)
-st.metric(label="Total Sales", value=total_sales.sum())
+st.metric(label="Total Sales", value=total_sales.values)
 
 st.line_chart(df[options])
 
