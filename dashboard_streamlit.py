@@ -11,7 +11,7 @@ import streamlit as st
 import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
-import statsmodels as sm
+import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
 import altair as alt
