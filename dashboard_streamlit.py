@@ -36,6 +36,7 @@ st.text('Start Date = ' + start_date)
 end_date = st.date_input('Pick a end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
+'''
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
   siteA_cat = pd.read_csv(uploaded_file)
@@ -62,9 +63,15 @@ for column in site_A_cat.columns:
     train = site_A_cat.loc[:, (slice(None), column)]
     model = sm.tsa.statespace.SARIMAX(train, order = (1,0,1), seasonal_order = (1,1,1,7),
                                 enforce_stationarity = False, enforce_invertibility = False, freq = 'D').fit()
-    forecast = model.forecast(steps = days)
-    forecast.name = column[1]
-    df = df.append(forecast)
+
+'''
+file= 'C:\\Users\\nirol\\OneDrive\\Documents\\MSc\\Dissertation\\Models\\SiteA' + option + '.pkl'
+    loaded_model= pickle.load(open(file,'rb'))
+
+df = pd.DataFrame()
+forecast = model.forecast(steps = days)
+forecast.name = column[1]
+df = df.append(forecast)
 df = df.T
 df.columns = [*df.columns[:-1], 'Total']
 
