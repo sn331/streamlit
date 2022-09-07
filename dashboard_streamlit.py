@@ -30,7 +30,7 @@ options = st.multiselect('Pick a category',
        'Maps', 'Toys', 'Unmapped Items', 'Paypoint PPOD',
        'Spare Shop Sales 22', 'Phonecard Commission', 'Pick & Mix',
        'Bakery Cold', 'Total'], default = 'Total')
-start_date = st.date_input('Pick a start date')
+start_date = '2022-06-30'
 end_date = st.date_input('Pick a end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
