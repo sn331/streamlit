@@ -18,7 +18,7 @@ import altair as alt
 import pickle
 
 st.set_page_config(layout="wide")
-st.title('EG Group Sales Dashboard')
+st.title('EG Group Sales Dashboard (SITE A)')
 options = st.multiselect('Pick a category',
        ['Unleaded', 'Tobacco', 'Diesel', 'Drinks',
        'Chiller', 'Confectionary', 'Snacks VAT',
