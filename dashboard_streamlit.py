@@ -15,6 +15,7 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
 import altair as alt
+import pickle
 
 st.set_page_config(layout="wide")
 st.title('EG Group Sales Dashboard')
