@@ -36,7 +36,7 @@ st.text('Start Date = ' + start_date)
 end_date = st.date_input('Pick a end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
-'''
+
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
   siteA_cat = pd.read_csv(uploaded_file)
@@ -67,11 +67,12 @@ for column in site_A_cat.columns:
 '''
 file= 'C:\\Users\\nirol\\OneDrive\\Documents\\MSc\\Dissertation\\Models\\SiteA' + option + '.pkl'
     loaded_model= pickle.load(open(file,'rb'))
+'''
 
-df = pd.DataFrame()
-forecast = model.forecast(steps = days)
-forecast.name = column[1]
-df = df.append(forecast)
+
+    forecast = model.forecast(steps = days)
+    forecast.name = column[1]
+    df = df.append(forecast)
 df = df.T
 df.columns = [*df.columns[:-1], 'Total']
 
