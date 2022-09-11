@@ -97,6 +97,6 @@ ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 plt.title('Internet Users and Non-Users by Disability')
 plt.xlabel('Year')
 plt.ylabel('Number of users')
-plt.style.use('dark_background')
+#plt.style.use('dark_background')
 st.pyplot(ax.figure)
 
