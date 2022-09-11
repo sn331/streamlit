@@ -72,8 +72,27 @@ st.metric(label="Total Sales", value=int(total_sales.sum()))
 st.line_chart(df[options])
 
 df = df.groupby(df.Month)[options].sum()
-site_A_cat = site_A_cat.groupby(pd.to_datetime(site_A_cat.index).month).sum()
-
 
 st.bar_chart(df)
-#st.altair_chart(bar)
+
+site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
+site_A_cat_2020= site_A_cat_2020.groupby(['Month']).sum()
+site_A_cat_2020 = site_A_cat_2020.reset_index()
+
+site_A_cat_2021 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2021]
+site_A_cat_2021= site_A_cat_2021.groupby(['Month']).sum()
+site_A_cat_2021 = site_A_cat_2021.reset_index()
+
+plt.bar(site_A_cat_2020['Month'], site_A_cat_2020.loc[:, (slice(None), options)].squeeze(), 0.35, alpha = 0.8, label='Diesel (2019)')
+plt.bar(site_A_cat_2021['Month'] + 0.35, site_A_cat_2021.loc[:, (slice(None), options)].squeeze(), 0.35, alpha = 0.8, label='Diesel (2020)')
+
+
+ax = plt.subplot(111)
+box = ax.get_position()
+ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+plt.title('Internet Users and Non-Users by Disability')
+plt.xlabel('Year')
+plt.ylabel('Number of users')
+plt.show()
+
