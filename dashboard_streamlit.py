@@ -75,6 +75,9 @@ df = df.groupby(df.Month)[options].sum()
 
 st.bar_chart(df)
 
+site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
+site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
+
 site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
 site_A_cat_2020= site_A_cat_2020.groupby(['Month']).sum()
 site_A_cat_2020 = site_A_cat_2020.reset_index()
