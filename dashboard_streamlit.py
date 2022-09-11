@@ -30,7 +30,7 @@ end_date = st.sidebar.date_input('Pick an end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
 
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
   siteA_cat = pd.read_csv(uploaded_file)
 
