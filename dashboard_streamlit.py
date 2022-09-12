@@ -19,15 +19,18 @@ import pickle
 
 st.set_page_config(layout="wide")
 st.title('EG Group Sales Dashboard (SITE A)')
+
+start_date = '2022-06-30'
+st.sidebar.text('Start Date = ' + start_date)
+end_date = st.sidebar.date_input('Pick an end date')
+days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
+
 options = st.sidebar.multiselect('Pick a category',
        ['Unleaded', 'Tobacco', 'Diesel', 'Drinks',
        'Chiller', 'Confectionary', 'Snacks VAT',
        'Grocery Zero', 'Hot Drinks Unit', 'E-Cig/Vaping',
        'News & Mags (Unit)', 'Total'], default = 'Total')
-start_date = '2022-06-30'
-st.sidebar.text('Start Date = ' + start_date)
-end_date = st.sidebar.date_input('Pick an end date')
-days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
+
 
 
 uploaded_file = st.sidebar.file_uploader("Choose a file")
