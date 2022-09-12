@@ -49,7 +49,7 @@ def fetch_and_clean_data(siteA_cat):
         site_A_cat = site_A_cat.round(2)
         site_A_cat= site_A_cat.reset_index()
         site_A_cat= pd.pivot_table(site_A_cat,index= 'TransactionTime',columns= 'Category',fill_value= 0)
-        site_A_cat['GrandTotal']= site_A_cat[list(site_A_cat.columns)].sum(axis= 1)
+        site_A_cat['Total']= site_A_cat[list(site_A_cat.columns)].sum(axis= 1)
         
         df = pd.DataFrame()
         for column in site_A_cat.columns:
