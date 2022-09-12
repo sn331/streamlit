@@ -77,9 +77,9 @@ st.metric(label="Total Sales", value=int(total_sales.sum()))
 
 st.line_chart(df[options])
 
-df = df.groupby(df.Month)[options].sum()
+df_cat = df.groupby(df.Month)[options].sum()
 
-st.bar_chart(df)
+st.bar_chart(df_cat)
 
 site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
 site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
