@@ -34,7 +34,7 @@ uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
   siteA_cat = pd.read_csv(uploaded_file)
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def fetch_and_clean_data(siteA_cat):
         siteA_cat = siteA_cat.drop(['TransactionLineID','ItemCode','ID', 'Heading'],axis=1,inplace= False)
         siteA_cat['TransactionTime']= pd.to_datetime(siteA_cat['TransactionTime']).dt.date
