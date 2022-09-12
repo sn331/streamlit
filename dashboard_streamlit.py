@@ -50,23 +50,23 @@ def fetch_and_clean_data(siteA_cat):
         site_A_cat= site_A_cat.reset_index()
         site_A_cat= pd.pivot_table(site_A_cat,index= 'TransactionTime',columns= 'Category',fill_value= 0)
         site_A_cat['GrandTotal']= site_A_cat[list(site_A_cat.columns)].sum(axis= 1)
+        
+        df = pd.DataFrame()
+        for column in site_A_cat.columns:
+            train = site_A_cat.loc[:, (slice(None), column)]
+            model = sm.tsa.statespace.SARIMAX(train, order = (1,0,1), seasonal_order = (1,1,1,7),
+                                        enforce_stationarity = False, enforce_invertibility = False, freq = 'D').fit()
+            forecast = model.forecast(steps = days)
+            forecast.name = column[1]
+            df = df.append(forecast)
+        df = df.T
+        df.columns = [*df.columns[:-1], 'Total']
+
+        df['Month'] = df.index.month
+        df['Year'] = df.index.year
         return site_A_cat
 
 site_A_cat = fetch_and_clean_data(siteA_cat)
-
-df = pd.DataFrame()
-for column in site_A_cat.columns:
-    train = site_A_cat.loc[:, (slice(None), column)]
-    model = sm.tsa.statespace.SARIMAX(train, order = (1,0,1), seasonal_order = (1,1,1,7),
-                                enforce_stationarity = False, enforce_invertibility = False, freq = 'D').fit()
-    forecast = model.forecast(steps = days)
-    forecast.name = column[1]
-    df = df.append(forecast)
-df = df.T
-df.columns = [*df.columns[:-1], 'Total']
-
-df['Month'] = df.index.month
-df['Year'] = df.index.year
 
 total_sales = df[options].sum()
 #st.write('Total Sales =', total_sales.values)
