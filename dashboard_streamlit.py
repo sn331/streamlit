@@ -68,6 +68,7 @@ def fetch_and_clean_data(siteA_cat):
         df['Month'] = df.index.month
         df['Year'] = df.index.year
         df['quarter'] = pd.PeriodIndex(df.index, freq='Q')
+        df['Period'] = df.index.to_period('M')
         return site_A_cat, df
 
 site_A_cat, df = fetch_and_clean_data(siteA_cat)
@@ -87,6 +88,7 @@ st.bar_chart(df_cat)
 site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
 site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
 site_A_cat['quarter'] = pd.PeriodIndex(site_A_cat.index, freq='Q')
+site_A_cat['Period'] = site_A_cat.index.to_period('M')
 
 site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
 site_A_cat_2020= site_A_cat_2020.groupby(['Month']).sum()
