@@ -64,9 +64,9 @@ def fetch_and_clean_data(siteA_cat):
 
         df['Month'] = df.index.month
         df['Year'] = df.index.year
-        return site_A_cat
+        return site_A_cat, df
 
-site_A_cat = fetch_and_clean_data(siteA_cat)
+site_A_cat, df = fetch_and_clean_data(siteA_cat)
 
 total_sales = df[options].sum()
 #st.write('Total Sales =', total_sales.values)
