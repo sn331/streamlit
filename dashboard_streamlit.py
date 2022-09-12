@@ -90,6 +90,7 @@ site_A_cat_2021= site_A_cat_2021.groupby(['Month']).sum()
 site_A_cat_2021 = site_A_cat_2021.reset_index()
 
 for i in options:
+    plt.clf()
     plt.bar(site_A_cat_2020['Month'], site_A_cat_2020.loc[:, (slice(None), i)].squeeze(), 0.35, alpha = 0.8, label = i + ' (2020)')
     plt.bar(site_A_cat_2021['Month'] + 0.35, site_A_cat_2021.loc[:, (slice(None), i)].squeeze(), 0.35, alpha = 0.8, label = i +' (2021)')
     ax = plt.subplot(111)
