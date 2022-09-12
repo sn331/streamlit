@@ -81,9 +81,10 @@ st.subheader('Daily Sales Forecast')
 st.line_chart(df[options])
 
 df_cat = df.groupby(['quarter'])[options].sum()
+df_cat = df_cat.reset_index()
 
 st.subheader('Quarterly Sales Forecast')
-st.bar_chart(df_cat)
+st.bar_chart(df_cat, x = 'quarter')
 
 site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
 site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
