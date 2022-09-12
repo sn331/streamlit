@@ -21,7 +21,7 @@ st.set_page_config(layout="wide")
 st.title('EG Group Sales Dashboard (SITE A)')
 
 start_date = '2022-06-30'
-st.title('Start Date = ' + start_date)
+st.text_input('Start Date = ' + start_date)
 end_date = st.sidebar.date_input('Pick an end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
