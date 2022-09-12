@@ -34,22 +34,25 @@ uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
   siteA_cat = pd.read_csv(uploaded_file)
 
+@st.cache
+ def fetch_and_clean_data(siteA_cat):
+        siteA_cat = siteA_cat.drop(['TransactionLineID','ItemCode','ID', 'Heading'],axis=1,inplace= False)
+        siteA_cat['TransactionTime']= pd.to_datetime(siteA_cat['TransactionTime']).dt.date
+        siteA_cat['Sales'] = siteA_cat['Quantity'] * siteA_cat['UnitPrice']
+        siteA_cat= siteA_cat.drop(['Quantity', 'UnitPrice'],axis=1,inplace= False)
+        
+        site_A_cat= pd.DataFrame()
+        for date in siteA_cat.TransactionTime.unique():
+            df= siteA_cat[(siteA_cat.TransactionTime == date)]
+            df= df.groupby(['Category','TransactionTime']).sum()
+            site_A_cat= site_A_cat.append(df,ignore_index= False)
+        site_A_cat = site_A_cat.round(2)
+        site_A_cat= site_A_cat.reset_index()
+        site_A_cat= pd.pivot_table(site_A_cat,index= 'TransactionTime',columns= 'Category',fill_value= 0)
+        site_A_cat['GrandTotal']= site_A_cat[list(site_A_cat.columns)].sum(axis= 1)
+        return site_A_cat
 
-siteA_cat = siteA_cat.drop(['TransactionLineID','ItemCode','ID', 'Heading'],axis=1,inplace= False)
-siteA_cat['TransactionTime']= pd.to_datetime(siteA_cat['TransactionTime']).dt.date
-siteA_cat['Sales'] = siteA_cat['Quantity'] * siteA_cat['UnitPrice']
-siteA_cat= siteA_cat.drop(['Quantity', 'UnitPrice'],axis=1,inplace= False)
-
-site_A_cat= pd.DataFrame()
-for date in siteA_cat.TransactionTime.unique():
-    df= siteA_cat[(siteA_cat.TransactionTime == date)]
-    df= df.groupby(['Category','TransactionTime']).sum()
-    site_A_cat= site_A_cat.append(df,ignore_index= False)
-
-site_A_cat = site_A_cat.round(2)
-site_A_cat= site_A_cat.reset_index()
-site_A_cat= pd.pivot_table(site_A_cat,index= 'TransactionTime',columns= 'Category',fill_value= 0)
-site_A_cat['GrandTotal']= site_A_cat[list(site_A_cat.columns)].sum(axis= 1)
+site_A_cat = fetch_and_clean_data(siteA_cat)
 
 df = pd.DataFrame()
 for column in site_A_cat.columns:
