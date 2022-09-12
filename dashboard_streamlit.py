@@ -65,7 +65,7 @@ def fetch_and_clean_data(siteA_cat):
         df = df.T
         df.columns = [*df.columns[:-1], 'Total']
 
-        df['Month'] = df.index.month
+        df['Month'] = df.index.month_name().str[:3]
         df['Year'] = df.index.year
         return site_A_cat, df
 
@@ -83,7 +83,7 @@ df_cat = df.groupby(['Month'])[options].sum()
 st.subheader('Monthly Sales Forecast')
 st.bar_chart(df_cat)
 
-site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
+site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month_name().str[:3]
 site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
 
 site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
