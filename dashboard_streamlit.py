@@ -67,8 +67,8 @@ def fetch_and_clean_data(siteA_cat):
 
         df['Month'] = df.index.month
         df['Year'] = df.index.year
-        df['quarter'] = pd.PeriodIndex(df.index, freq='Q')
-        df['Period'] = df.index.to_period('M')
+        #df['quarter'] = pd.PeriodIndex(df.index, freq='Q')
+        #df['Period'] = df.index.to_period('M')
         return site_A_cat, df
 
 site_A_cat, df = fetch_and_clean_data(siteA_cat)
@@ -80,48 +80,48 @@ st.metric(label="Total Sales", value=int(total_sales.sum()))
 st.subheader('Daily Sales Forecast')
 st.line_chart(df[options])
 
-df['Period'] = pd.to_numeric(df['Period'], errors = 'coerce')
-df_cat = df.groupby(['quarter'])[options].sum()
+#df['Period'] = pd.to_numeric(df['Period'], errors = 'coerce')
+df_cat = df.groupby(['Month'])[options].sum()
 
 st.subheader('Quarterly Sales Forecast')
 st.bar_chart(df_cat)
 
 site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
 site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
-site_A_cat['quarter'] = pd.PeriodIndex(site_A_cat.index, freq='Q')
-site_A_cat.index = pd.to_datetime(site_A_cat.index)
-site_A_cat['Period'] = site_A_cat.index.to_period('M')
-site_A_cat['Period'] = pd.to_numeric(site_A_cat['Period'], errors = 'coerce')
+#site_A_cat['quarter'] = pd.PeriodIndex(site_A_cat.index, freq='Q')
+#site_A_cat.index = pd.to_datetime(site_A_cat.index)
+#site_A_cat['Period'] = site_A_cat.index.to_period('M')
+#site_A_cat['Period'] = pd.to_numeric(site_A_cat['Period'], errors = 'coerce')
 
 site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
-site_A_cat_2020= site_A_cat_2020.groupby(['Period']).sum()
+site_A_cat_2020= site_A_cat_2020.groupby(['Month']).sum()
 site_A_cat_2020 = site_A_cat_2020.reset_index()
 
 site_A_cat_2021 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2021]
-site_A_cat_2021= site_A_cat_2021.groupby(['Period']).sum()
+site_A_cat_2021= site_A_cat_2021.groupby(['Month']).sum()
 site_A_cat_2021 = site_A_cat_2021.reset_index()
 
 df_2022 = df[df['Year'] == 2022]
-df_2022= df_2022.groupby(['Period']).sum()
+df_2022= df_2022.groupby(['Month']).sum()
 df_2022 = df_2022.reset_index()
 
 df_2023 = df[df['Year'] == 2023]
-df_2023= df_2023.groupby(['Period']).sum()
+df_2023= df_2023.groupby(['Month']).sum()
 df_2023 = df_2023.reset_index()
 
 st.subheader('Year-on-Year Sales Comparison')
 for i in options:
     plt.clf()
     if i == 'Total':
-        plt.bar(site_A_cat_2020['Period'], site_A_cat_2020[i].squeeze(), 0.2, alpha = 0.8, label = i + ' (2020)')
-        plt.bar(site_A_cat_2021['Period'] + 0.2, site_A_cat_2021[i].squeeze(), 0.2, alpha = 0.8, label = i +' (2021)')
-        plt.bar(df_2022['Period'] + 0.4, df_2022[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2022)')
-        plt.bar(df_2023['Period'] + 0.6, df_2023[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2023)')
+        plt.bar(site_A_cat_2020['Month'], site_A_cat_2020[i].squeeze(), 0.2, alpha = 0.8, label = i + ' (2020)')
+        plt.bar(site_A_cat_2021['Month'] + 0.2, site_A_cat_2021[i].squeeze(), 0.2, alpha = 0.8, label = i +' (2021)')
+        plt.bar(df_2022['Month'] + 0.4, df_2022[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2022)')
+        plt.bar(df_2023['Month'] + 0.6, df_2023[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2023)')
     else:
-        plt.bar(site_A_cat_2020['Period'], site_A_cat_2020.loc[:, (slice(None), i)].squeeze(), 0.2, alpha = 0.8, label = i + ' (2020)')
-        plt.bar(site_A_cat_2021['Period'] + 0.2, site_A_cat_2021.loc[:, (slice(None), i)].squeeze(), 0.2, alpha = 0.8, label = i +' (2021)')
-        plt.bar(df_2022['Period'] + 0.4, df_2022[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2022)')
-        plt.bar(df_2023['Period'] + 0.6, df_2023[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2023)')
+        plt.bar(site_A_cat_2020['Month'], site_A_cat_2020.loc[:, (slice(None), i)].squeeze(), 0.2, alpha = 0.8, label = i + ' (2020)')
+        plt.bar(site_A_cat_2021['Month'] + 0.2, site_A_cat_2021.loc[:, (slice(None), i)].squeeze(), 0.2, alpha = 0.8, label = i +' (2021)')
+        plt.bar(df_2022['Month'] + 0.4, df_2022[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2022)')
+        plt.bar(df_2023['Month'] + 0.6, df_2023[i].squeeze(), 0.2, alpha = 0.8, label='Forecast (2023)')
     ax = plt.subplot(111)
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
