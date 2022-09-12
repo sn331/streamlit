@@ -76,7 +76,7 @@ total_sales = df[options].sum()
 st.metric(label="Total Sales", value=int(total_sales.sum()))
 
 st.subheader('Daily Sales Forecast')
-st.line_chart(df[options], x = 'Date', y = 'Sales')
+st.line_chart(df[options])
 
 df_cat = df.groupby(['Month'])[options].sum()
 
