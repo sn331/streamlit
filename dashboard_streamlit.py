@@ -102,7 +102,7 @@ df_2023 = df[df['Year'] == 2023]
 df_2023= df_2023.groupby(['Month']).sum()
 df_2023 = df_2023.reset_index()
 
-st.subheader('Actual vs Expected Sales Comparison')
+st.subheader('Year-on-Year Sales Comparison')
 for i in options:
     plt.clf()
     if i == 'Total':
