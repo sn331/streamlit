@@ -86,17 +86,14 @@ site_A_cat_2021 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2021]
 site_A_cat_2021= site_A_cat_2021.groupby(['Month']).sum()
 site_A_cat_2021 = site_A_cat_2021.reset_index()
 
-plt.bar(site_A_cat_2020['Month'], site_A_cat_2020.loc[:, (slice(None), options)].squeeze(), 0.35, alpha = 0.8, label='Diesel (2019)')
-plt.bar(site_A_cat_2021['Month'] + 0.35, site_A_cat_2021.loc[:, (slice(None), options)].squeeze(), 0.35, alpha = 0.8, label='Diesel (2020)')
-
-
-ax = plt.subplot(111)
-box = ax.get_position()
-ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-plt.title('Internet Users and Non-Users by Disability')
-plt.xlabel('Year')
-plt.ylabel('Number of users')
-#plt.style.use('dark_background')
-st.pyplot(ax.figure)
-
+for i in options:
+    plt.bar(site_A_cat_2020['Month'], site_A_cat_2020.loc[:, (slice(None), i)].squeeze(), 0.35, alpha = 0.8, label = options + ' (2020)')
+    plt.bar(site_A_cat_2021['Month'] + 0.35, site_A_cat_2021.loc[:, (slice(None), i)].squeeze(), 0.35, alpha = 0.8, label = options +' (2021)')
+    ax = plt.subplot()
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.title('Internet Users and Non-Users by Disability')
+    plt.xlabel('Year')
+    plt.ylabel('Number of users')
+    plt.show()
