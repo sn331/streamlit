@@ -99,4 +99,4 @@ for i in options:
     plt.title('Monthly Sales Comparison')
     plt.xlabel('Month')
     plt.ylabel('Sales')
-    plt.show()
+    st.pyplot(ax.figure)
