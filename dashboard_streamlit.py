@@ -89,6 +89,7 @@ st.bar_chart(df_cat, x = df_cat['quarter'])
 site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
 site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
 site_A_cat['quarter'] = pd.PeriodIndex(site_A_cat.index, freq='Q')
+site_A_cat.index = pd.to_datetime(site_A_cat.index)
 site_A_cat['Period'] = site_A_cat.index.to_period('M')
 
 site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
