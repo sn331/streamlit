@@ -92,7 +92,7 @@ site_A_cat_2021 = site_A_cat_2021.reset_index()
 for i in options:
     plt.bar(site_A_cat_2020['Month'], site_A_cat_2020.loc[:, (slice(None), i)].squeeze(), 0.35, alpha = 0.8, label = i + ' (2020)')
     plt.bar(site_A_cat_2021['Month'] + 0.35, site_A_cat_2021.loc[:, (slice(None), i)].squeeze(), 0.35, alpha = 0.8, label = i +' (2021)')
-    ax = plt.subplot()
+    ax = plt.subplot(111)
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
