@@ -75,11 +75,12 @@ total_sales = df[options].sum()
 #st.write('Total Sales =', total_sales.values)
 st.metric(label="Total Sales", value=int(total_sales.sum()))
 
-st.subheader('Sales Forecast')
+st.subheader('Daily Sales Forecast')
 st.line_chart(df[options])
 
 df_cat = df.groupby(df.Month)[options].sum()
 
+st.subheader('Monthly Sales Forecast')
 st.bar_chart(df_cat)
 
 site_A_cat['Month'] = pd.DatetimeIndex(site_A_cat.index).month
@@ -101,6 +102,7 @@ df_2023 = df[df['Year'] == 2023]
 df_2023= df_2023.groupby(['Month']).sum()
 df_2023 = df_2023.reset_index()
 
+st.subheader('Actual vs Expected Sales Comparison')
 for i in options:
     plt.clf()
     if i == 'Total':
