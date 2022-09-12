@@ -80,6 +80,7 @@ st.metric(label="Total Sales", value=int(total_sales.sum()))
 st.subheader('Daily Sales Forecast')
 st.line_chart(df[options])
 
+df['Period'] = pd.to_numeric(df['Period'], errors = 'coerce')
 df_cat = df.groupby(['quarter'])[options].sum()
 
 st.subheader('Quarterly Sales Forecast')
@@ -90,6 +91,7 @@ site_A_cat['Year'] = pd.DatetimeIndex(site_A_cat.index).year
 site_A_cat['quarter'] = pd.PeriodIndex(site_A_cat.index, freq='Q')
 site_A_cat.index = pd.to_datetime(site_A_cat.index)
 site_A_cat['Period'] = site_A_cat.index.to_period('M')
+site_A_cat['Period'] = pd.to_numeric(site_A_cat['Period'], errors = 'coerce')
 
 site_A_cat_2020 = site_A_cat[site_A_cat.loc[:, 'Year'] == 2020]
 site_A_cat_2020= site_A_cat_2020.groupby(['Period']).sum()
