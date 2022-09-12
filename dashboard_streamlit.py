@@ -91,7 +91,7 @@ site_A_cat_2021 = site_A_cat_2021.reset_index()
 
 for i in options:
     plt.clf()
-    if options == 'Total':
+    if i == 'Total':
         plt.bar(site_A_cat_2020['Month'], site_A_cat_2020[i].squeeze(), 0.35, alpha = 0.8, label = i + ' (2020)')
         plt.bar(site_A_cat_2021['Month'] + 0.35, site_A_cat_2021[i].squeeze(), 0.35, alpha = 0.8, label = i +' (2021)')
     else:
