@@ -35,7 +35,7 @@ if uploaded_file is not None:
   siteA_cat = pd.read_csv(uploaded_file)
 
 @st.cache
- def fetch_and_clean_data(siteA_cat):
+def fetch_and_clean_data(siteA_cat):
         siteA_cat = siteA_cat.drop(['TransactionLineID','ItemCode','ID', 'Heading'],axis=1,inplace= False)
         siteA_cat['TransactionTime']= pd.to_datetime(siteA_cat['TransactionTime']).dt.date
         siteA_cat['Sales'] = siteA_cat['Quantity'] * siteA_cat['UnitPrice']
