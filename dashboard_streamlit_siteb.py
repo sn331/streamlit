@@ -18,12 +18,13 @@ import altair as alt
 import pickle
 
 st.set_page_config(layout="wide")
-st.sidebar.title('EG Group Sales Dashboard (SITE B)')
-options = st.sidebar.multiselect('Pick a category',
-       ['Chiller', 'Confectionary', 'Diesel', 'Drinks', 'Grocery Zero', 'Hot Drinks Unit', 'Snacks VAT', 'Tobacco', 'Unleaded', 'Total'], default = 'Total')
+st.title('EG Group Sales Dashboard (SITE B)')
 start_date = '2022-06-30'
 st.sidebar.text('Start Date = ' + start_date)
 end_date = st.sidebar.date_input('Pick an end date')
+options = st.sidebar.multiselect('Pick a category',
+       ['Chiller', 'Confectionary', 'Diesel', 'Drinks', 'Grocery Zero', 'Hot Drinks Unit', 'Snacks VAT', 'Tobacco', 'Unleaded', 'Total'], default = 'Total')
+
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
 
