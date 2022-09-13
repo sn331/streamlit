@@ -20,7 +20,7 @@ import pickle
 st.set_page_config(layout="wide")
 st.title('EG Group Sales Dashboard (SITE B)')
 start_date = '2022-06-30'
-st.sidebar.text('Start Date = ' + start_date)
+st.sidebar.text_input('Start Date (Fixed)', value = start_date)
 end_date = st.sidebar.date_input('Pick an end date')
 options = st.sidebar.multiselect('Pick a category',
        ['Chiller', 'Confectionary', 'Diesel', 'Drinks', 'Grocery Zero', 'Hot Drinks Unit', 'Snacks VAT', 'Tobacco', 'Unleaded', 'Total'], default = 'Total')
