@@ -22,7 +22,7 @@ st.title('EG Group Sales Dashboard (SITE A)')
 
 start_date = '2022-06-30'
 st.sidebar.text_input('Start Date (Fixed)', value = start_date)
-end_date = st.sidebar.date_input('Pick an end date', max_value = '2022/12/31')
+end_date = st.sidebar.date_input('Pick an end date')
 days = (dt.strptime(str(end_date), "%Y-%m-%d") - dt.strptime(str(start_date), "%Y-%m-%d")).days
 
 options = st.sidebar.multiselect('Pick a category',
