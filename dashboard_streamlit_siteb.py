@@ -75,8 +75,9 @@ st.metric(label="Total Sales", value=int(total_sales.sum()))
 st.subheader('Daily Sales Forecast')
 st.line_chart(df[options])
 
+df['Quarter'] = df.index.quarter
 #df['Period'] = pd.to_numeric(df['Period'], errors = 'coerce')
-df_cat = df.groupby(['Month'])[options].sum()
+df_cat = df.groupby(['Quarter'])[options].sum()
 
 st.subheader('Quarterly Sales Forecast')
 st.bar_chart(df_cat)
